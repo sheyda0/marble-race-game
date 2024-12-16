@@ -4,7 +4,6 @@ import { useKeyboardControls } from "@react-three/drei";
 import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import useGame from "../stores/useGame";
-import { useKeyboard } from "../context/keyboardContext";
 import { isMobile } from "react-device-detect";
 
 export default function Player() {
@@ -19,7 +18,6 @@ export default function Player() {
   const end = useGame((state) => state.end);
   const restart = useGame((state) => state.restart);
   const blocksCount = useGame((state) => state.blocksCount);
-  // const { keyboard } = useKeyboard();
 
   const jump = (y) => {
     const origin = body.current.translation();

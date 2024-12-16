@@ -18,7 +18,7 @@ export default function Interface() {
   const jump = useKeyboardControls((state) => state.jump);
 
   const clickButtonStart = (value) => {
-    clickKeyboard(value); // Start the movement
+    clickKeyboard(value);
   };
 
   const clickButtonStop = () => {

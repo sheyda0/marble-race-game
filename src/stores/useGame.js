@@ -18,12 +18,19 @@ export default create(
        */
       phase: "ready",
       clickKeyboard: (value) => {
-        console.log("hui");
-
         set((state) => {
-          return { keyboard: value, phase: "playing", startTime: Date.now() };
+          if (value === null) {
+            return { keyboard: null };
+          }
+
+          if (state.phase === "ready") {
+            return { keyboard: value, phase: "playing", startTime: Date.now() };
+          }
+
+          return { keyboard: value };
         });
       },
+
       start: () => {
         set((state) => {
           if (state.phase === "ready")
