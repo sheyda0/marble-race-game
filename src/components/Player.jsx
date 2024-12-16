@@ -1,10 +1,11 @@
-import { useRapier, RigidBody } from "@react-three/rapier";
+import { RigidBody } from "@react-three/rapier";
 import { useFrame } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
 import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import useGame from "../stores/useGame";
 import { useKeyboard } from "../context/keyboardContext";
+import { isMobile } from "react-device-detect";
 
 export default function Player() {
   const body = useRef();
@@ -17,7 +18,7 @@ export default function Player() {
   const end = useGame((state) => state.end);
   const restart = useGame((state) => state.restart);
   const blocksCount = useGame((state) => state.blocksCount);
-  const { keyboard, clickKeyboard } = useKeyboard();
+  const { keyboard } = useKeyboard();
 
   const jump = (y) => {
     const origin = body.current.translation();
@@ -42,7 +43,7 @@ export default function Player() {
     const unsubscribeJump = subscribeKeys(
       (state) => state.jump,
       (value) => {
-        if (value) jump(0.5);
+        if (value) jump(0.4);
       }
     );
 
@@ -99,8 +100,8 @@ export default function Player() {
 
     const cameraPosition = new THREE.Vector3();
     cameraPosition.copy(bodyPosition);
-    cameraPosition.z += 2.25;
-    cameraPosition.y += 0.65;
+    cameraPosition.z += isMobile ? 3.5 : 2.25;
+    cameraPosition.y += isMobile ? 1 : 0.65;
 
     const cameraTarget = new THREE.Vector3();
     cameraTarget.copy(bodyPosition);

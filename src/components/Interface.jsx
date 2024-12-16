@@ -70,6 +70,8 @@ export default function Interface() {
             className={`key ${forward ? "active" : ""}`}
             onMouseDown={() => clickButtonStart("forward")}
             onMouseUp={() => clickButtonStop()}
+            onTouchStart={() => clickButtonStart("forward")}
+            onTouchEnd={() => clickButtonStop()}
           ></div>
         </div>
         <div className="raw">
@@ -77,16 +79,22 @@ export default function Interface() {
             className={`key ${leftward ? "active" : ""}`}
             onMouseDown={() => clickButtonStart("leftward")}
             onMouseUp={() => clickButtonStop()}
+            onTouchStart={() => clickButtonStart("leftward")}
+            onTouchEnd={() => clickButtonStop()}
           ></div>
           <div
             className={`key ${backward ? "active" : ""}`}
             onMouseDown={() => clickButtonStart("backward")}
             onMouseUp={() => clickButtonStop()}
+            onTouchStart={() => clickButtonStart("backward")}
+            onTouchEnd={() => clickButtonStop()}
           ></div>
           <div
             className={`key ${rightward ? "active" : ""}`}
             onMouseDown={() => clickButtonStart("rightward")}
             onMouseUp={() => clickButtonStop()}
+            onTouchStart={() => clickButtonStart("rightward")}
+            onTouchEnd={() => clickButtonStop()}
           ></div>
         </div>
         <div className="raw">
@@ -94,6 +102,8 @@ export default function Interface() {
             className={`key large ${jump ? "active" : ""}`}
             onMouseDown={() => clickButtonStart("jump")}
             onMouseUp={() => clickButtonStop()}
+            onTouchStart={() => clickButtonStart("jump")}
+            onTouchEnd={() => clickButtonStop()}
           ></div>
         </div>
       </div>
