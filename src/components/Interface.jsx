@@ -5,10 +5,9 @@ import useGame from "../stores/useGame";
 import { addEffect } from "@react-three/fiber";
 
 export default function Interface() {
-  const { keyboard, clickKeyboard } = useKeyboard();
-
   const time = useRef();
 
+  const clickKeyboard = useGame((state) => state.clickKeyboard);
   const restart = useGame((state) => state.restart);
   const phase = useGame((state) => state.phase);
 

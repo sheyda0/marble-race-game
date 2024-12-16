@@ -4,6 +4,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 export default create(
   subscribeWithSelector((set) => {
     return {
+      keyboard: null,
       blocksCount: 6,
       blocksSeed: 0,
       /**
@@ -16,6 +17,13 @@ export default create(
        * Phase
        */
       phase: "ready",
+      clickKeyboard: (value) => {
+        console.log("hui");
+
+        set((state) => {
+          return { keyboard: value, phase: "playing", startTime: Date.now() };
+        });
+      },
       start: () => {
         set((state) => {
           if (state.phase === "ready")

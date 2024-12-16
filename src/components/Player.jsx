@@ -14,11 +14,12 @@ export default function Player() {
     () => new THREE.Vector3(10, 10, 10)
   );
   const [smoothedCameraTarget] = useState(() => new THREE.Vector3());
+  const keyboard = useGame((state) => state.keyboard);
   const start = useGame((state) => state.start);
   const end = useGame((state) => state.end);
   const restart = useGame((state) => state.restart);
   const blocksCount = useGame((state) => state.blocksCount);
-  const { keyboard } = useKeyboard();
+  // const { keyboard } = useKeyboard();
 
   const jump = (y) => {
     const origin = body.current.translation();
