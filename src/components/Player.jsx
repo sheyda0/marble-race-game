@@ -86,7 +86,7 @@ export default function Player() {
       torque.z -= torqueStrength;
     }
     if (keyboard === "jump") {
-      jump(0.1);
+      jump(0.08);
     }
 
     body.current.applyImpulse(impulse);
