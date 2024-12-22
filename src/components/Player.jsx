@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import useGame from "../stores/useGame";
 import { isMobile } from "react-device-detect";
+import useTheme from "../stores/useTheme";
 
 export default function Player() {
   const body = useRef();
@@ -18,6 +19,7 @@ export default function Player() {
   const end = useGame((state) => state.end);
   const restart = useGame((state) => state.restart);
   const blocksCount = useGame((state) => state.blocksCount);
+  const ballColor = useTheme((state) => state.ballColor);
 
   const jump = (y) => {
     const origin = body.current.translation();
@@ -132,7 +134,7 @@ export default function Player() {
     >
       <mesh castShadow>
         <icosahedronGeometry args={[0.3, 1]} />
-        <meshStandardMaterial flatShading color="mediumpurple" />
+        <meshStandardMaterial flatShading color={ballColor} />
       </mesh>
     </RigidBody>
   );

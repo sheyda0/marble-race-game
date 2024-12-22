@@ -6,21 +6,32 @@ import BlockLimbo from "./BlockLimbo";
 import BlockAxe from "./BlockAxe";
 import { useMemo } from "react";
 import Bounds from "./Bounds";
-
-// Geometry
-const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-
-// Materials
-const floor1Material = new THREE.MeshStandardMaterial({ color: "limegreen" });
-const floor2Material = new THREE.MeshStandardMaterial({ color: "greenyellow" });
-const obstacleMaterial = new THREE.MeshStandardMaterial({ color: "orangered" });
-const wallMaterial = new THREE.MeshStandardMaterial({ color: "slategray" });
+import useTheme from "../../stores/useTheme";
 
 export default function Level({
   count = 5,
   types = [BlockSpinner, BlockAxe, BlockLimbo],
   seed = 0,
 }) {
+  const wallColor = useTheme((state) => state.wallColor);
+  const floorColor = useTheme((state) => state.floorColor);
+  const abstacleColor = useTheme((state) => state.abstacleColor);
+
+  // Geometry
+  const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+
+  // Materials
+  const floor1Material = new THREE.MeshStandardMaterial({ color: floorColor });
+  const floor2Material = new THREE.MeshStandardMaterial({
+    color: floorColor,
+    transparent: true,
+    opacity: 0.7,
+  });
+  const obstacleMaterial = new THREE.MeshStandardMaterial({
+    color: abstacleColor,
+  });
+  const wallMaterial = new THREE.MeshStandardMaterial({ color: wallColor });
+
   const blocks = useMemo(() => {
     const blocks = [];
 

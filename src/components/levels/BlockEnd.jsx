@@ -1,15 +1,19 @@
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
+import * as THREE from "three";
 
 export default function BlockEnd({
   position = [0, 0, 0],
   geometry,
   floorMaterial,
 }) {
-  const hamburger = useGLTF("./hamburger.glb");
+  const hamburger = useGLTF("./scene.gltf");
 
-  hamburger.scene.children.forEach((mesh) => {
-    mesh.castShadow = true;
+  hamburger.scene.traverse((child) => {
+    child.castShadow = true;
+    if (child.isMesh) {
+      child.material.color = new THREE.Color(0xf5da0a);
+    }
   });
 
   return (
@@ -29,7 +33,7 @@ export default function BlockEnd({
         restitution={0.2}
         friction={0}
       >
-        <primitive scale={0.2} object={hamburger.scene} />
+        <primitive scale={0.008} position-y={-0.15} object={hamburger.scene} />
       </RigidBody>
     </group>
   );
