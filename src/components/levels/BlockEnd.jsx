@@ -2,14 +2,14 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
-import useModelStore from "../../stores/useModelStore";
+import useModel from "../../stores/useModel";
 
 export default function BlockEnd({
   position = [0, 0, 0],
   geometry,
   floorMaterial,
 }) {
-  const { setModel } = useModelStore();
+  const { setModel } = useModel();
   const hamburger = useGLTF("./scene.gltf");
 
   React.useEffect(() => {

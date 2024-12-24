@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import useModelStore from "../../stores/useModelStore";
+import useModel from "../../stores/useModel";
 import useGame from "../../stores/useGame";
 import { isMobile } from "react-device-detect";
 
 const Preloader = () => {
-  const { model } = useModelStore(); // Access the model from Zustand
+  const { model } = useModel(); // Access the model from Zustand
   const [loadingComplete, setLoadingComplete] = useState(false);
 
   const { play, reset, toggleMute, setAudioElement, isPlaying, isMuted } =

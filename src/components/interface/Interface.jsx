@@ -1,25 +1,22 @@
-import { Float, useKeyboardControls } from "@react-three/drei";
+import { useKeyboardControls } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import { addEffect } from "@react-three/fiber";
 import useGame from "../../stores/useGame";
 import { isMobile } from "react-device-detect";
 import SelectTheme from "./SelectTheme";
 import Preloader from "./Preloader";
-import SoundButton from "./SoundButton";
 import Settings from "./Settings";
 
 export default function Interface() {
   const [showThemes, setShowThemes] = useState();
 
   const time = useRef();
-  const selectThemeBtn = useRef();
   const audioRef = useRef(null);
 
   const clickKeyboard = useGame((state) => state.clickKeyboard);
   const restart = useGame((state) => state.restart);
   const phase = useGame((state) => state.phase);
-  const { play, reset, toggleMute, setAudioElement, isPlaying, isMuted } =
-    useGame();
+  const { setAudioElement } = useGame();
 
   const forward = useKeyboardControls((state) => state.forward);
   const backward = useKeyboardControls((state) => state.backward);
@@ -39,24 +36,15 @@ export default function Interface() {
     setShowThemes(value);
   };
 
-  // useEffect(() => {
-  //   if (phase !== "ready") {
-  //     selectThemeBtn.current.remove();
-  //     handleShowThemes(false);
-  //     audioRef.current.src =
-  //       "/action-intro-trailer-210365-[AudioTrimmer.com] (1).mp3";
-  //   }
-  // }, [phase]);
-
   useEffect(() => {
     if (audioRef.current) {
       if (phase === "ready") {
-        audioRef.current.pause(); // Stop playback for "ready"
+        audioRef.current.pause();
       } else if (phase !== "ready") {
-        audioRef.current.pause(); // Pause the current playback
-        audioRef.current.src = "/happyrock.mp3"; // Assign the new source
+        audioRef.current.pause();
+        audioRef.current.src = "/happyrock.mp3";
         audioRef.current.loop = true;
-        audioRef.current.load(); // Reload the audio
+        audioRef.current.load();
         audioRef.current.play().catch((err) => {
           console.error("Audio playback failed:", err);
         });
@@ -107,18 +95,10 @@ export default function Interface() {
     <>
       <Preloader />
       <audio ref={audioRef} src="" loop={true}></audio>
-      {/* {phase === "ready" && ( */}
-      <Settings onThemeBtnClick={() => handleShowThemes(true)} />
-      {/* )} */}
+      {phase === "ready" && (
+        <Settings onThemeBtnClick={() => handleShowThemes(true)} />
+      )}
 
-      {/* <button
-        ref={selectThemeBtn}
-        className="change-theme-btn"
-        onClick={() => handleShowThemes(true)}
-      >
-        <img src="./palette (2).png" alt="" />
-      </button> */}
-      {/* <SoundButton /> */}
       {showThemes && (
         <SelectTheme onThemeClick={() => handleShowThemes(false)} />
       )}

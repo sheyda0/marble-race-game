@@ -30,7 +30,6 @@ export default create(
           return { keyboard: value };
         });
       },
-
       start: () => {
         set((state) => {
           if (state.phase === "ready")
@@ -58,11 +57,7 @@ export default create(
       isPlaying: false,
       isMuted: false,
       audioElement: null,
-
-      // Set the audio element (should be done when the component mounts)
       setAudioElement: (audio) => set({ audioElement: audio }),
-
-      // Play audio
       play: () =>
         set((state) => {
           if (state.audioElement) {
@@ -70,8 +65,6 @@ export default create(
           }
           return { isPlaying: true };
         }),
-
-      // Reset audio
       reset: () =>
         set((state) => {
           if (state.audioElement) {
@@ -80,8 +73,6 @@ export default create(
           }
           return { isPlaying: false };
         }),
-
-      // Mute/unmute audio
       toggleMute: () =>
         set((state) => {
           if (state.audioElement) {
