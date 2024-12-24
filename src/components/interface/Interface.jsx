@@ -4,16 +4,22 @@ import { addEffect } from "@react-three/fiber";
 import useGame from "../../stores/useGame";
 import { isMobile } from "react-device-detect";
 import SelectTheme from "./SelectTheme";
+import Preloader from "./Preloader";
+import SoundButton from "./SoundButton";
+import Settings from "./Settings";
 
 export default function Interface() {
   const [showThemes, setShowThemes] = useState();
 
   const time = useRef();
   const selectThemeBtn = useRef();
+  const audioRef = useRef(null);
 
   const clickKeyboard = useGame((state) => state.clickKeyboard);
   const restart = useGame((state) => state.restart);
   const phase = useGame((state) => state.phase);
+  const { play, reset, toggleMute, setAudioElement, isPlaying, isMuted } =
+    useGame();
 
   const forward = useKeyboardControls((state) => state.forward);
   const backward = useKeyboardControls((state) => state.backward);
@@ -33,12 +39,46 @@ export default function Interface() {
     setShowThemes(value);
   };
 
+  // useEffect(() => {
+  //   if (phase !== "ready") {
+  //     selectThemeBtn.current.remove();
+  //     handleShowThemes(false);
+  //     audioRef.current.src =
+  //       "/action-intro-trailer-210365-[AudioTrimmer.com] (1).mp3";
+  //   }
+  // }, [phase]);
+
   useEffect(() => {
-    if (phase !== "ready") {
-      selectThemeBtn.current.remove();
-      handleShowThemes(false);
+    if (audioRef.current) {
+      if (phase === "ready") {
+        audioRef.current.pause(); // Stop playback for "ready"
+      } else if (phase !== "ready") {
+        audioRef.current.pause(); // Pause the current playback
+        audioRef.current.src = "/happyrock.mp3"; // Assign the new source
+        audioRef.current.loop = true;
+        audioRef.current.load(); // Reload the audio
+        audioRef.current.play().catch((err) => {
+          console.error("Audio playback failed:", err);
+        });
+      }
+
+      if (phase === "ended") {
+        audioRef.current.pause();
+        audioRef.current.src = "/252114605-supportive-applause-charity-ru.m4a";
+        audioRef.current.loop = false;
+        audioRef.current.load();
+        audioRef.current.play().catch((err) => {
+          console.error("Audio playback failed on ended phase:", err);
+        });
+      }
     }
   }, [phase]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      setAudioElement(audioRef.current);
+    }
+  }, [setAudioElement]);
 
   useEffect(() => {
     const unsubscribeEffect = addEffect(() => {
@@ -65,19 +105,23 @@ export default function Interface() {
 
   return (
     <>
-      <button
+      <Preloader />
+      <audio ref={audioRef} src="" loop={true}></audio>
+      {phase === "ready" && (
+        <Settings onThemeBtnClick={() => handleShowThemes(true)} />
+      )}
+
+      {/* <button
         ref={selectThemeBtn}
         className="change-theme-btn"
         onClick={() => handleShowThemes(true)}
       >
-        Change Theme
-        {/* <img src="./palette (2).png" alt="" /> */}
-      </button>
-
+        <img src="./palette (2).png" alt="" />
+      </button> */}
+      {/* <SoundButton /> */}
       {showThemes && (
         <SelectTheme onThemeClick={() => handleShowThemes(false)} />
       )}
-
       <div className="interface">
         {/* Time */}
         <div className="time" ref={time}>

@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #ff6500;
+  --secondary-color: #0b192c;
+}
+
 * {
   font-family: "Bebas Neue", cursive;
 }
@@ -96,7 +101,7 @@ body,
 }
 
 .themes-container {
-  background-color: #bdedfc;
+  background-color: var(--secondary-color);
   position: absolute;
   top: 0;
   left: 0;
@@ -114,6 +119,7 @@ body,
   margin-bottom: 4rem;
   padding: 2rem 2rem 0 2rem;
   text-align: center;
+  color: var(--primary-color);
 }
 
 .themes {
@@ -131,7 +137,7 @@ body,
   width: 9rem;
   height: 9rem;
   cursor: pointer;
-  border: 2px white solid;
+  border: 2px black solid;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -150,6 +156,7 @@ body,
   -moz-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
   -o-transform: translateY(-5px);
+  border-color: var(--primary-color);
 }
 
 .theme-box div {
@@ -157,27 +164,49 @@ body,
   height: 25%;
 }
 
-.change-theme-btn {
+.close-theme-btn {
   position: absolute;
-  top: 2rem;
-  right: 1rem;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+button {
   background: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
+}
+
+.settings-menu {
+  background: var(--primary-color);
+  border-bottom-left-radius: 10rem;
+  border-bottom-right-radius: 10rem;
+  position: absolute;
+  top: 0;
+  right: 1rem;
   font-size: 1.25rem;
   color: black;
   display: flex;
   align-items: center;
   gap: 8px;
-  cursor: pointer;
   z-index: 3;
-  background: #ffffff99;
-  padding: 3px 8px;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  /*background: #ffffff99;
+  */
+  padding: 10px 4px 10px 4px;
+  height: 2.3rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.settings-menu.expanded {
+  height: 10rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -192,4 +221,123 @@ body,
     width: 7rem;
     height: 7rem;
   }
+  .loading {
+    font-size: 0.6rem !important;
+  }
+  .loading h1 {
+    min-width: 90vw;
+  }
+}
+
+.overlay {
+  z-index: 5;
+  opacity: 1;
+  background-color: var(--secondary-color);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  pointer-events: none;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+}
+
+.overlay.fade {
+  opacity: 0;
+}
+
+.loading {
+  text-align: center;
+  z-index: 6;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  color: var(--primary-color);
+  background-color: transparent;
+  font-size: 0.75rem;
+  font-weight: 400;
+  font-family: "Amatic SC", sans-serif;
+  opacity: 1;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+}
+
+.loading.fade {
+  opacity: 0;
+}
+
+.start {
+  z-index: 6;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  color: white;
+  background-color: transparent;
+  font-size: 1rem;
+  font-family: "Amatic SC", sans-serif;
+  opacity: 1;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  button {
+    background: var(--primary-color) !important;
+    color: var(--secondary-color);
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 3rem;
+    padding: 0 20px;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+  }
+  div {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    color: var(--primary-color);
+  }
+}
+
+/* .start button:hover {
+  color: ;
+} */
+
+.fade {
+  opacity: 0;
+  display: none;
+  transition: opacity 1.5s ease;
+}
+
+.fadeOut {
+  opacity: 0;
+  display: none;
+  transition: opacity 1.5s ease;
 }

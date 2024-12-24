@@ -1,8 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import useTheme from "../../stores/useTheme";
-import useGame from "../../stores/useGame";
 
 const themes = [
+  {
+    ballColor: "mediumpurple",
+    floorColor: "limegreen",
+    abstacleColor: "orangered",
+    wallColor: "slategrey",
+  },
   {
     ballColor: "#604CC3",
     floorColor: "#FF7F3E",
@@ -28,12 +33,7 @@ const themes = [
     abstacleColor: "#131842",
     wallColor: "#ECCEAE",
   },
-  {
-    ballColor: "#33372C",
-    floorColor: "#557C56",
-    abstacleColor: "#FF885B",
-    wallColor: "#FFE5CF",
-  },
+
   {
     ballColor: "#EC8305",
     floorColor: "#DBD3D3",
@@ -66,6 +66,20 @@ export default function SelectTheme({ onThemeClick }) {
 
   return (
     <div className="themes-container" ref={themeContainer}>
+      <button className="close-theme-btn" onClick={onThemeClick}>
+        <svg
+          width="36px"
+          height="36px"
+          viewBox="0 0 1024 1024"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="#ffffff"
+            d="M195.2 195.2a64 64 0 0 1 90.496 0L512 421.504 738.304 195.2a64 64 0 0 1 90.496 90.496L602.496 512 828.8 738.304a64 64 0 0 1-90.496 90.496L512 602.496 285.696 828.8a64 64 0 0 1-90.496-90.496L421.504 512 195.2 285.696a64 64 0 0 1 0-90.496z"
+          />
+        </svg>
+      </button>
+
       <h2>Pick your favorite theme and start rolling!</h2>
 
       <div className="themes">

@@ -4,10 +4,10 @@ import { subscribeWithSelector } from "zustand/middleware";
 export default create(
   subscribeWithSelector((set) => {
     return {
-      ballColor: "#604CC3",
-      floorColor: "#FF7F3E",
-      abstacleColor: "#FFF6E9",
-      wallColor: "#80C4E9",
+      ballColor: "#FF6500",
+      floorColor: "#1E3E62",
+      abstacleColor: "#000000",
+      wallColor: "#0B192C",
       selectTheme: (theme) => {
         set((state) => {
           return {

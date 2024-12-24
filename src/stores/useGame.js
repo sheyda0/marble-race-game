@@ -5,7 +5,7 @@ export default create(
   subscribeWithSelector((set) => {
     return {
       keyboard: null,
-      blocksCount: 3,
+      blocksCount: 12,
       blocksSeed: 0,
       /**
        * Time
@@ -52,6 +52,43 @@ export default create(
           return {};
         });
       },
+      /**
+       * Audio
+       */
+      isPlaying: false,
+      isMuted: false,
+      audioElement: null,
+
+      // Set the audio element (should be done when the component mounts)
+      setAudioElement: (audio) => set({ audioElement: audio }),
+
+      // Play audio
+      play: () =>
+        set((state) => {
+          if (state.audioElement) {
+            state.audioElement.play();
+          }
+          return { isPlaying: true };
+        }),
+
+      // Reset audio
+      reset: () =>
+        set((state) => {
+          if (state.audioElement) {
+            state.audioElement.pause();
+            state.audioElement.currentTime = 0;
+          }
+          return { isPlaying: false };
+        }),
+
+      // Mute/unmute audio
+      toggleMute: () =>
+        set((state) => {
+          if (state.audioElement) {
+            state.audioElement.muted = !state.audioElement.muted;
+          }
+          return { isMuted: !state.isMuted };
+        }),
     };
   })
 );

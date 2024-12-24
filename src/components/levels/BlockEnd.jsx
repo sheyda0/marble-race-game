@@ -1,20 +1,26 @@
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
+import useModelStore from "../../stores/useModelStore";
 
 export default function BlockEnd({
   position = [0, 0, 0],
   geometry,
   floorMaterial,
 }) {
+  const { setModel } = useModelStore();
   const hamburger = useGLTF("./scene.gltf");
 
-  hamburger.scene.traverse((child) => {
-    child.castShadow = true;
-    if (child.isMesh) {
-      child.material.color = new THREE.Color(0xf5da0a);
-    }
-  });
+  React.useEffect(() => {
+    setModel(hamburger);
+    hamburger.scene.traverse((child) => {
+      child.castShadow = true;
+      if (child.isMesh) {
+        child.material.color = new THREE.Color(0xf5da0a);
+      }
+    });
+  }, [hamburger, setModel]);
 
   return (
     <group position={position}>
