@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useModelStore from "../../stores/useModelStore";
 import useGame from "../../stores/useGame";
+import { isMobile } from "react-device-detect";
 
 const Preloader = () => {
   const { model } = useModelStore(); // Access the model from Zustand
@@ -54,7 +55,7 @@ const Preloader = () => {
           <button onClick={handleStart} type="button">
             START
           </button>
-          <div>Move: WASD</div>
+          {!isMobile && <div>Move: WASD</div>}
         </div>
       )}
     </>

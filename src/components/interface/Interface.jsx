@@ -107,9 +107,9 @@ export default function Interface() {
     <>
       <Preloader />
       <audio ref={audioRef} src="" loop={true}></audio>
-      {phase === "ready" && (
-        <Settings onThemeBtnClick={() => handleShowThemes(true)} />
-      )}
+      {/* {phase === "ready" && ( */}
+      <Settings onThemeBtnClick={() => handleShowThemes(true)} />
+      {/* )} */}
 
       {/* <button
         ref={selectThemeBtn}
