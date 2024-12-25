@@ -5,7 +5,7 @@ export default create(
   subscribeWithSelector((set) => {
     return {
       keyboard: null,
-      blocksCount: 12,
+      blocksCount: 15,
       blocksSeed: 0,
       /**
        * Time
